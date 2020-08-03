@@ -47,8 +47,14 @@ class SearchScreenViewController: UITableViewController {
     }
     
     private func configureNavBar() {
-        let closeBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeHandler))
-        navigationItem.rightBarButtonItem = closeBarButtonItem
+        if #available(iOS 13.0, *) {
+            let closeBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeHandler))
+            navigationItem.rightBarButtonItem = closeBarButtonItem
+        } else {
+            let closeBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(closeHandler))
+            navigationItem.rightBarButtonItem = closeBarButtonItem
+        }
+        
     }
     
     @objc
@@ -85,7 +91,7 @@ class SearchScreenViewController: UITableViewController {
     }
     
     func didPresentSearchController(_ searchController: UISearchController) {
-        searchController.searchBar.searchTextField.becomeFirstResponder()
+        searchController.searchBar.becomeFirstResponder()
     }
     
     // MARK: - Table view delegate
