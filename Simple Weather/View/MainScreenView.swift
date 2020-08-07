@@ -19,7 +19,6 @@ final class MainScreenView: UIView {
     
     lazy var currentWeatherLabel: UILabel = {
         let l = UILabel()
-        l.text = "..."
         l.numberOfLines = 0
         l.textAlignment = .center
         l.translatesAutoresizingMaskIntoConstraints = false

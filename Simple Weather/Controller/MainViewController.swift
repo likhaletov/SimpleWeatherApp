@@ -38,7 +38,11 @@ class MainScreenViewController: UIViewController {
     }
     
     var userLocation: CLLocation? {
-        didSet { refreshUserLocationWeather() }
+        didSet {
+            if NetworkMonitor.shared.isConnected {
+                refreshUserLocationWeather()
+            }
+        }
     }
     
     // MARK: - Load view
@@ -54,10 +58,10 @@ class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NetworkMonitor.shared.startMonitoring()
         loadData()
         configureUI()
     }
-    
     
     private func configureUI() {
         title = "Simple Weather"
@@ -149,48 +153,47 @@ class MainScreenViewController: UIViewController {
     }
     
     private func refreshUserLocationWeather() {
-        if CLLocationManager.locationServicesEnabled() {
+        if NetworkMonitor.shared.isConnected {
             
-            let lat = locationManager.getLat()
-            let lon = locationManager.getLon()
-            
-            networkManager.obtain(from: URL.getAPI(lat: lat, lon: lon, units: Settings.apiMetrics), completion: { [weak self] (result) in
+            if CLLocationManager.locationServicesEnabled() {
+                let lat = locationManager.getLat()
+                let lon = locationManager.getLon()
                 
-                guard let self = self else { return }
-                
-                switch result {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                case .success(let data):
+                networkManager.obtain(from: URL.getAPI(lat: lat, lon: lon, units: Settings.apiMetrics), completion: { [weak self] (result) in
+                    guard let self = self else { return }
                     
-                    let decoder = JSONDecoder()
-                    
-                    do {
-                        let response = try decoder.decode(WeatherResponse.self, from: data)
-                        
-                        guard let condition = response.weather.first?.main else { return }
-                        
-                        let string = """
-                        \(response.name)
-                        \(Condition.cases[condition] ?? "") \(String.roundDouble(number: response.main.temp)) \(Settings.metrics)
-                        """
-                        
-                        DispatchQueue.main.async {
-                            
-                            self.mainView.currentWeatherLabel.attributedText = AttributedStringFormatter.formatString(
-                                sourceString: string,
-                                fontSize: 25,
-                                color: .black
-                            )
-                        }
-                    } catch let error {
+                    switch result {
+                    case .failure(let error):
                         print(error.localizedDescription)
+                    case .success(let data):
+                        let decoder = JSONDecoder()
+                        
+                        do {
+                            let response = try decoder.decode(WeatherResponse.self, from: data)
+                            guard let condition = response.weather.first?.main else { return }
+                            
+                            let string = """
+                            \(response.name)
+                            \(Condition.cases[condition] ?? "") \(String.roundDouble(number: response.main.temp)) \(Settings.metrics)
+                            """
+                            
+                            DispatchQueue.main.async {
+                                self.mainView.currentWeatherLabel.attributedText = AttributedStringFormatter.formatString(
+                                    sourceString: string,
+                                    fontSize: 25,
+                                    color: .black
+                                )
+                            }
+                        } catch let error {
+                            print(error.localizedDescription)
+                        }
                     }
-                    
-                }
-                
-            })
-            
+                })
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.mainView.currentWeatherLabel.text = "No internet connection"
+            }
         }
     }
     
@@ -236,10 +239,14 @@ class MainScreenViewController: UIViewController {
     
     @objc
     private func addBarButtonItemHandler() {
-        if let searchVC = ScreenAssembly.createSearchScreen() as? SearchScreenViewController {
-            searchVC.delegate = self
-            let nav = UINavigationController(rootViewController: searchVC)
-            present(nav, animated: true, completion: nil)
+        if NetworkMonitor.shared.isConnected {
+            if let searchVC = ScreenAssembly.createSearchScreen() as? SearchScreenViewController {
+                searchVC.delegate = self
+                let nav = UINavigationController(rootViewController: searchVC)
+                present(nav, animated: true, completion: nil)
+            }
+        } else {
+            print("error: check your internet connection, please")
         }
     }
     

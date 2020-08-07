@@ -25,6 +25,7 @@
 		AA2FD871249CC553002C3213 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2FD870249CC553002C3213 /* LocationManager.swift */; };
 		AA31F7EE249FDB6A0063A159 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA31F7ED249FDB6A0063A159 /* URL.swift */; };
 		AA5A169F24A25FDA00389CC2 /* LocationManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5A169E24A25FDA00389CC2 /* LocationManagerProtocol.swift */; };
+		AA62A5BB24D83178002F3DAC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA62A5BA24D83178002F3DAC /* NetworkMonitor.swift */; };
 		AA752A0824C58C9A00DF9D0C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA752A0724C58C9A00DF9D0C /* String.swift */; };
 		AA8422B024CF2EE60050A6E7 /* ForecastDimmedTransitionPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8422AF24CF2EE60050A6E7 /* ForecastDimmedTransitionPresentationController.swift */; };
 		AA8422B424D4CED40050A6E7 /* MapKitProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8422B324D4CED40050A6E7 /* MapKitProtocols.swift */; };
@@ -77,6 +78,7 @@
 		AA2FD870249CC553002C3213 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA31F7ED249FDB6A0063A159 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		AA5A169E24A25FDA00389CC2 /* LocationManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManagerProtocol.swift; path = "Simple Weather/Services/Location/LocationManagerProtocol.swift"; sourceTree = SOURCE_ROOT; };
+		AA62A5BA24D83178002F3DAC /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		AA752A0724C58C9A00DF9D0C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		AA8422AF24CF2EE60050A6E7 /* ForecastDimmedTransitionPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDimmedTransitionPresentationController.swift; sourceTree = "<group>"; };
 		AA8422B324D4CED40050A6E7 /* MapKitProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitProtocols.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				AAB99ABA24CAFC290002A3DE /* Persistent */,
 				AA150E4224CDCBFC0095A6AD /* Location */,
 				AACD1C3424A87EFD00433C3E /* AttributedStringFormatter.swift */,
+				AA62A5BA24D83178002F3DAC /* NetworkMonitor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA2FD869249CAC31002C3213 /* JSON+CurrentWeatherModel.swift in Sources */,
+				AA62A5BB24D83178002F3DAC /* NetworkMonitor.swift in Sources */,
 				AA2D789224A72BC1001DBB72 /* MainScreenView.swift in Sources */,
 				AA150E3F24CDA1590095A6AD /* NetworkManagerProtocol.swift in Sources */,
 				AA8AF01C24A02A2F00CAF58F /* SearchResultsUpdate.swift in Sources */,
