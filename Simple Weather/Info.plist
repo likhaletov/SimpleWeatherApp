@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>bla bla bla</string>
+	<string>We need access to geodata for the application to work correctly.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>bla bla bla</string>
+	<string>We need access to geodata for the application to work correctly.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
